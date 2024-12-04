@@ -3,6 +3,7 @@ from tkinter import ttk
 from functools import partial
 from PIL import Image, ImageTk  # Importing from Pillown
 import os
+from time import strftime
 
 # Create the main application window
 app = tk.Tk () 
@@ -10,6 +11,23 @@ app.title("Hydraulic calculations Application Prepared by.......................
 app.geometry("1500x900+200+50")
 app.resizable(False, False) 
 app.configure(background="#002b36")
+# custom font
+cutom_font1=("arial", 11)
+custom_font2=("callibre",12,"bold")
+custom_font3=("callibre",14,"bold")
+#frames
+Frame1 = tk.LabelFrame(
+    app, 
+    text= " \u2630 list of contents", 
+    height=730, 
+    width=280,
+    background="grey23",highlightbackground="white",font=cutom_font1,foreground="white"
+)
+Frame1.place(x=1215,y=165)
+Fram2=tk.Frame(app,height=160, width=1500, highlightbackground="white", background="gainsboro")
+Fram2.pack(side="top", fill="x", padx=1, pady=1)
+Frame3=tk.Frame(app,height=500,width=200,highlightbackground="#002b36")
+Frame3.place(x=10,y=180)
 # user defined functions
 def label_animation(label1, color1):
     labels = [L1, L2, L3, L4, L5, L6]
@@ -43,22 +61,6 @@ def Theory_of_hyd ():
     L12.place(x=260,y=545)
     B12=tk.Button(Frame1, text="\u2699Service page", width=25, height=1, background="yellow4", foreground="white",font=cutom_font1,command=partial(label_animation, L12, "yellow4"))
     B12.place(x=20,y=550)
-
-# custom font
-cutom_font1=("arial", 11)
-custom_font2=("callibre",12,"bold")
-custom_font3=("callibre",14,"bold")
-#frames
-Frame1 = tk.LabelFrame(
-    app, 
-    text= " \u2630 list of contents", 
-    height=730, 
-    width=280,
-    background="grey23",highlightbackground="white",font=cutom_font1,foreground="white"
-)
-Frame1.place(x=1215,y=165)
-Fram2=tk.Frame(app,height=160, width=1500, highlightbackground="white", background="gainsboro")
-Fram2.pack(side="top", fill="x", padx=1, pady=1)
 def lable_inside_frame2 (text):
     lable_inside_frame = ttk.Label(text=text,foreground="black", background="gainsboro",font=custom_font2)
     return lable_inside_frame
@@ -69,11 +71,31 @@ def display_image(image_path, x, y, width, height):
     label = tk.Label(app, image=photo)
     label.image = photo  # Keep a reference to avoid garbage collection
     label.place(x=x, y=y)
+# function to update date and time
+time_entry=tk.Entry(Fram2,background="yellow4",foreground="white", width=18, font=cutom_font1)
+time_entry.place(x=1050,y=55,height=25, width=150)
+def update_time ():
+    current_time=strftime('%H : %M : %S')
+    time_entry.delete(0,tk.END)
+    time_entry.insert(0, f"  Time : {current_time}")
+    #Time_lable.configure(text=f"Time : {current_time}")
+    app.after(1000, update_time)
+update_time ()  
+Date=strftime("%d : %m : %Y")
+date_entry=tk.Entry(Fram2,background="yellow4",foreground="white", width=18, font=cutom_font1)
+date_entry.place(x=1050,y=15,height=25, width=150)
+date_entry.delete(0, tk.END)
+date_entry.insert(0,f"  Date : {Date}")
 display_image(os.path.join(os.path.dirname(__file__), 'shibaura_new.png'), 30, 40, 180, 70)
 display_image(os.path.join(os.path.dirname(__file__), 'hyd.jpg'), 1215, 15, 200, 130)
 lable_inside_frame2("Research and Developement of Shibaura Machine").place(x=20,y=10)
 lable_inside_frame2("Prepared by : ASK").place(x=1050, y=130)
 lable_inside_frame2("Approved by : SVK").place(x=20, y=130)
+image_path = os.path.join(os.path.dirname(__file__), 'cloud.png')
+Shibaura_logo = Image.open(image_path)
+photo = ImageTk.PhotoImage(Shibaura_logo)
+label_for_shibauralogo = tk.Label(Frame3, image=photo)
+label_for_shibauralogo.pack()
 Heading_lable=tk.Label(Fram2,text="Hydraulic Calculation Application",font=custom_font3,background="lightslategrey",
                         foreground= "black", height=2, width=30, relief= "ridge")
 Heading_lable.place(x=520,y=10)
