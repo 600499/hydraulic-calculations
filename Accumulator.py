@@ -14,7 +14,7 @@ app.configure(background="#002b36")
 def label_animation(label1, color1):
     labels = [L1, L2, L3, L4, L5, L6]
     for la in labels:
-        la.configure(background="grey23")  # Reset all labels to red
+        la.configure(background="grey23")
     label1.configure(background=color1) 
 def Theory_of_hyd ():
     B11.destroy()
