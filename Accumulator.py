@@ -26,8 +26,8 @@ Frame1 = tk.LabelFrame(
 Frame1.place(x=1215,y=165)
 Fram2=tk.Frame(app,height=160, width=1500, highlightbackground="white", background="gainsboro")
 Fram2.pack(side="top", fill="x", padx=1, pady=1)
-Frame3=tk.Frame(app,height=500,width=200,highlightbackground="#002b36")
-Frame3.place(x=10,y=180)
+Fram3=tk.Frame(app,height=685, width=1210, background="#002b36")
+Fram3.place(x=1,y=210)
 # user defined functions
 def label_animation(label1, color1):
     labels = [L1, L2, L3, L4, L5, L6]
@@ -87,18 +87,42 @@ date_entry.place(x=1050,y=15,height=25, width=150)
 date_entry.delete(0, tk.END)
 date_entry.insert(0,f"  Date : {Date}")
 display_image(os.path.join(os.path.dirname(__file__), 'shibaura_new.png'), 30, 40, 180, 70)
-display_image(os.path.join(os.path.dirname(__file__), 'hyd.jpg'), 1215, 15, 200, 130)
+display_image(os.path.join(os.path.dirname(__file__), 'hyd.jpg'), 1250, 15, 200, 130)
+# Image animation for screen
+image_list = [
+    os.path.join(os.path.dirname(__file__), 'cloud3.jpg'),
+    os.path.join(os.path.dirname(__file__), 'cloud.jpg'),
+    os.path.join(os.path.dirname(__file__), 'cloud2.jpg'), 
+    os.path.join(os.path.dirname(__file__), 'unit2.jpg'),
+    os.path.join(os.path.dirname(__file__), 'team.jpg')
+]
+# Function to load and resize images
+def load_images(image_list, width, height):
+    images = []
+    for file in image_list:
+        img = Image.open(file).resize((width, height), Image.LANCZOS)
+        images.append(ImageTk.PhotoImage(img))
+    return images
+images = load_images(image_list, 1210, 685)
+# Add the first image to the frame as a label
+current_image_index = 0
+label_for_images = tk.Label(Fram3, image=images[current_image_index])
+label_for_images.place(x=0, y=0, relwidth=1, relheight=1)
+# Function to update the image
+def update_image():
+    global current_image_index
+    current_image_index = (current_image_index + 1) % len(images)  # Loop through images
+    label_for_images.configure(image=images[current_image_index])
+    label_for_images.image = images[current_image_index]  # Keep reference
+    app.after(3000, update_image)  # Call this function again after 3 seconds
+# Start the animation
+app.after(3000, update_image)
 lable_inside_frame2("Research and Developement of Shibaura Machine").place(x=20,y=10)
 lable_inside_frame2("Prepared by : ASK").place(x=1050, y=130)
 lable_inside_frame2("Approved by : SVK").place(x=20, y=130)
-image_path = os.path.join(os.path.dirname(__file__), 'cloud.png')
-Shibaura_logo = Image.open(image_path)
-photo = ImageTk.PhotoImage(Shibaura_logo)
-label_for_shibauralogo = tk.Label(Frame3, image=photo)
-label_for_shibauralogo.pack()
-Heading_lable=tk.Label(Fram2,text="Hydraulic Calculation Application",font=custom_font3,background="lightslategrey",
-                        foreground= "black", height=2, width=30, relief= "ridge")
-Heading_lable.place(x=520,y=10)
+#Heading_lable=tk.Label(Fram2,text="Hydraulic Calculation Application",font=custom_font3,background="lightslategrey",
+                        #foreground= "black", height=2, width=30, relief= "ridge")
+#Heading_lable.place(x=520,y=10)
 #Buttons inside frame1
 L1=tk.Label(Frame1,text="", height=2,width=0, background="grey23")
 L1.place(x=260,y=45)
@@ -131,9 +155,14 @@ L11=tk.Label(Frame1,text="", height=2,width=0, background="grey23")
 L11.place(x=260,y=345)
 B11=tk.Button(Frame1, text=" \u2699 Service page", width=25, height=1, background="yellow4", foreground="white",font=cutom_font1,command=partial(label_animation, L11, "yellow4"))
 B11.place(x=20,y=350)
-
-
-    
+B13=tk.Button(app, text=" \u2630 Service page", width=20, height=1, background="yellow4", foreground="white",font=cutom_font1,command=partial(label_animation, L11, "yellow4"))
+B13.place(x=1,y=170)
+B14=tk.Button(app, text=" \u2630 Service page", width=20, height=1, background="yellow4", foreground="white",font=cutom_font1,command=partial(label_animation, L11, "yellow4"))
+B14.place(x=195,y=170)
+B15=tk.Button(app, text=" \u2630 Service page", width=20, height=1, background="yellow4", foreground="white",font=cutom_font1,command=partial(label_animation, L11, "yellow4"))
+B15.place(x=389,y=170)
+B16=tk.Button(app, text=" \u2630 Service page", width=20, height=1, background="yellow4", foreground="white",font=cutom_font1,command=partial(label_animation, L11, "yellow4"))
+B16.place(x=583,y=170)
 
 # Run the application
 app.mainloop()
