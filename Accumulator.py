@@ -12,10 +12,10 @@ app.geometry("1500x900+200+50")
 app.resizable(False, False) 
 app.configure(background="#002b36")
 # custom font
-cutom_font1=("arial", 11)
+cutom_font1=("arial", 11)   
 custom_font2=("callibre",12,"bold")
-custom_font3=("callibre",14,"bold")
-#frames
+custom_font3=("callibre",14,"bold","underline")
+#Farme Declaration inside the Applications 
 Frame1 = tk.LabelFrame(
     app, 
     text= " \u2630 list of contents", 
@@ -28,7 +28,17 @@ Fram2=tk.Frame(app,height=160, width=1500, highlightbackground="white", backgrou
 Fram2.pack(side="top", fill="x", padx=1, pady=1)
 Fram3=tk.Frame(app,height=685, width=1210, background="#002b36")
 Fram3.place(x=1,y=210)
-# user defined functions
+#------------------------------------------------------------------Import Pressure Drop calculation----------------------------------------------------------------------------------------------------------#
+from Pressure_Drop_Calculation import pressuer_drop_calculation
+def clear_frame(frame):
+    """Clear all widgets in the frame."""
+    for widget in frame.winfo_children():
+        widget.destroy()
+
+def switch_to_Pressure_drop_calculaton():
+    clear_frame(Fram3)
+    pressuer_drop_calculation(Fram3)
+#++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++User Defined Functions ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 def label_animation(label1, color1):
     labels = [L1, L2, L3, L4, L5, L6]
     for la in labels:
@@ -117,13 +127,20 @@ def update_image():
     app.after(3000, update_image)  # Call this function again after 3 seconds
 # Start the animation
 app.after(3000, update_image)
+#+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++Widgets inside frame 2++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 lable_inside_frame2("Research and Developement of Shibaura Machine").place(x=20,y=10)
 lable_inside_frame2("Prepared by : ASK").place(x=1050, y=130)
 lable_inside_frame2("Approved by : SVK").place(x=20, y=130)
-#Heading_lable=tk.Label(Fram2,text="Hydraulic Calculation Application",font=custom_font3,background="lightslategrey",
-                        #foreground= "black", height=2, width=30, relief= "ridge")
-#Heading_lable.place(x=520,y=10)
-#Buttons inside frame1
+Heading_lable=tk.Label(Fram2,text="HYDRAULIC CALCULATIONS APPLICATION",font=custom_font3,background="gainsboro",
+                        foreground= "#002b36", height=2, width=40)
+Heading_lable.place(x=450,y=10)
+#+++++++++++++++++++++++++++++++++++++++++++++Buttons and Label Inside Frame 1+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+def Combined_function_1():
+    label_animation(L4, "yellow4")
+    switch_to_Pressure_drop_calculaton ()
+def combined_function ():
+    label_animation (L6,"yellow4")
+    Theory_of_hyd ()
 L1=tk.Label(Frame1,text="", height=2,width=0, background="grey23")
 L1.place(x=260,y=45)
 B1=tk.Button(Frame1, text=" \U0001F6E0 Throttle Calculations", width=25, height=1, background="yellow4", foreground="white",font=cutom_font1, command=partial(label_animation, L1, "yellow4") )
@@ -138,7 +155,7 @@ B3=tk.Button(Frame1, text="\U0001F4D5 Pipe Flow Calculations", width=25, height=
 B3.place(x=20,y=150)
 L4=tk.Label(Frame1,text="", height=2,width=0, background="grey23")
 L4.place(x=260,y=195)
-B4=tk.Button(Frame1, text="\U0001F529 Pressure Drop Calculations", width=25, height=1, background="yellow4", foreground="white",font=cutom_font1,command=partial(label_animation, L4, "yellow4"))
+B4=tk.Button(Frame1, text="\U0001F529 Pressure Drop Calculations", width=25, height=1, background="yellow4", foreground="white",font=cutom_font1,command=Combined_function_1)
 B4.place(x=20,y=200)
 L5=tk.Label(Frame1,text="", height=2,width=0, background="grey23")
 L5.place(x=260,y=245)
@@ -146,23 +163,24 @@ B5=tk.Button(Frame1, text="\u2702 Accumulator Calculations", width=25, height=1,
 B5.place(x=20,y=250)
 L6=tk.Label(Frame1,text="", height=2,width=0, background="grey23")
 L6.place(x=260,y=295)
-def combined_function ():
-    label_animation (L6,"yellow4")
-    Theory_of_hyd ()
 B6=tk.Button(Frame1, text="\U0001F6E2 Theory of hydraulics", width=25, height=1, background="yellow4", foreground="white",font=cutom_font1,command=combined_function)
 B6.place(x=20,y=300)
 L11=tk.Label(Frame1,text="", height=2,width=0, background="grey23")
 L11.place(x=260,y=345)
-B11=tk.Button(Frame1, text=" \u2699 Service page", width=25, height=1, background="yellow4", foreground="white",font=cutom_font1,command=partial(label_animation, L11, "yellow4"))
+B11=tk.Button(Frame1, text=" \u2699 Service page", width=25, height=1, background="yellow4", foreground="white",font=cutom_font1)
 B11.place(x=20,y=350)
-B13=tk.Button(app, text=" \u2630 Service page", width=20, height=1, background="yellow4", foreground="white",font=cutom_font1,command=partial(label_animation, L11, "yellow4"))
+B13=tk.Button(app, text=" \u2630 Service page", width=20, height=1, background="yellow4", foreground="white",font=cutom_font1)
 B13.place(x=1,y=170)
-B14=tk.Button(app, text=" \u2630 Service page", width=20, height=1, background="yellow4", foreground="white",font=cutom_font1,command=partial(label_animation, L11, "yellow4"))
+B14=tk.Button(app, text=" \u2630 Service page", width=20, height=1, background="yellow4", foreground="white",font=cutom_font1)
 B14.place(x=195,y=170)
-B15=tk.Button(app, text=" \u2630 Service page", width=20, height=1, background="yellow4", foreground="white",font=cutom_font1,command=partial(label_animation, L11, "yellow4"))
+B15=tk.Button(app, text=" \u2630 Service page", width=20, height=1, background="yellow4", foreground="white",font=cutom_font1)
 B15.place(x=389,y=170)
-B16=tk.Button(app, text=" \u2630 Service page", width=20, height=1, background="yellow4", foreground="white",font=cutom_font1,command=partial(label_animation, L11, "yellow4"))
+B16=tk.Button(app, text=" \u2630 Service page", width=20, height=1, background="yellow4", foreground="white",font=cutom_font1)
 B16.place(x=583,y=170)
+
+
+
+
 
 # Run the application
 app.mainloop()
