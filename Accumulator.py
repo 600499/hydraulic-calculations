@@ -29,6 +29,7 @@ Fram2.pack(side="top", fill="x", padx=1, pady=1)
 Fram3=tk.Frame(app,height=685, width=1210, background="#002b36")
 Fram3.place(x=1,y=210)
 #------------------------------------------------------------------Import Pressure Drop calculation----------------------------------------------------------------------------------------------------------#
+from Cylinder_calculation import cylinder_calculation
 from Pressure_Drop_Calculation import pressuer_drop_calculation
 def clear_frame(frame):
     """Clear all widgets in the frame."""
@@ -38,6 +39,9 @@ def clear_frame(frame):
 def switch_to_Pressure_drop_calculaton():
     clear_frame(Fram3)
     pressuer_drop_calculation(Fram3)
+def swith_to_cylinder_calculation ():
+    clear_frame(Fram3)
+    cylinder_calculation (Fram3)    
 #++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++User Defined Functions ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 def label_animation(label1, color1):
     labels = [L1, L2, L3, L4, L5, L6]
@@ -138,6 +142,9 @@ Heading_lable.place(x=450,y=10)
 def Combined_function_1():
     label_animation(L4, "yellow4")
     switch_to_Pressure_drop_calculaton ()
+def Combined_function_2 ():
+    label_animation(L2, "yellow4")
+    swith_to_cylinder_calculation()    
 def combined_function ():
     label_animation (L6,"yellow4")
     Theory_of_hyd ()
@@ -147,7 +154,7 @@ B1=tk.Button(Frame1, text=" \U0001F6E0 Throttle Calculations", width=25, height=
 B1.place(x=20,y=50)
 L2=tk.Label(Frame1,text="", height=2,width=0, background="grey23")
 L2.place(x=260,y=95)
-B2=tk.Button(Frame1, text="\U0001F527 Hydraulic cylinder calculations", width=25, height=1, background="yellow4", foreground="white",font=cutom_font1,command=partial(label_animation, L2, "yellow4"))
+B2=tk.Button(Frame1, text="\U0001F527 Hydraulic cylinder calculations", width=25, height=1, background="yellow4", foreground="white",font=cutom_font1,command= Combined_function_2)
 B2.place(x=20,y=100)
 L3=tk.Label(Frame1,text="", height=2,width=0, background="grey23")
 L3.place(x=260,y=145)
