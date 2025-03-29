@@ -148,12 +148,12 @@ def pressuer_drop_calculation(frame):
         Flowrate=float(spinboxes["Spinbox_for_Flowrate"].get())
         Flowrate_in_mm3per_sec=float(Flowrate*10**6)/60
         Inlet_Area=float(spinboxes["Spinbox_for_InletArea"].get())
-        inlet_velociy_mm_per_sec=  Flowrate_in_mm3per_sec/Inlet_Area
+        inlet_velociy_mm_per_sec=  float(Flowrate_in_mm3per_sec/Inlet_Area)
         inlet_velociy_m_per_sec= inlet_velociy_mm_per_sec/1000
         spinboxes["Spinbox_for_inletvelocity"].delete(0, tk.END)
         spinboxes["Spinbox_for_inletvelocity"].insert(0, round(inlet_velociy_m_per_sec, 2))
         Outlet_Area=float(spinboxes["Spinbox_for_outletArea"].get())
-        outlet_velociy_mm_per_sec=Flowrate_in_mm3per_sec/Outlet_Area
+        outlet_velociy_mm_per_sec=float(Flowrate_in_mm3per_sec/Outlet_Area)
         outlet_velociy_m_per_sec=outlet_velociy_mm_per_sec/1000
         spinboxes["Spinbox_for_outletvelocity"].delete(0, tk.END)
         spinboxes["Spinbox_for_outletvelocity"].insert(0, round(outlet_velociy_m_per_sec, 2))   
@@ -174,7 +174,6 @@ def pressuer_drop_calculation(frame):
             messagebox.showinfo("Error","outlet velocity should be <6 m/s")
         else:
             spinboxes["Spinbox_for_outletvelocity"].config(background = "white")            
-
 
     Calculate_B1=tk.Button(Frame3, text="CALCULATE", width=15, height=1, background="yellow4", foreground="Black",font=custom_font_1,command= Calculate)
     Calculate_B1.place(x=250,y=110)

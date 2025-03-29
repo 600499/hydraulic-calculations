@@ -28,9 +28,13 @@ Fram2=tk.Frame(app,height=160, width=1500, highlightbackground="white", backgrou
 Fram2.pack(side="top", fill="x", padx=1, pady=1)
 Fram3=tk.Frame(app,height=685, width=1210, background="#002b36")
 Fram3.place(x=1,y=210)
+
+
 #------------------------------------------------------------------Import Pressure Drop calculation----------------------------------------------------------------------------------------------------------#
 from Cylinder_calculation import cylinder_calculation
 from Pressure_Drop_Calculation import pressuer_drop_calculation
+from Oil_Prewarming import oil_prewarming_calculation
+from Cylinder_Design import cylinder_Design
 def clear_frame(frame):
     """Clear all widgets in the frame."""
     for widget in frame.winfo_children():
@@ -39,9 +43,16 @@ def clear_frame(frame):
 def switch_to_Pressure_drop_calculaton():
     clear_frame(Fram3)
     pressuer_drop_calculation(Fram3)
-def swith_to_cylinder_calculation ():
+def switch_to_cylinder_calculation ():
     clear_frame(Fram3)
-    cylinder_calculation (Fram3)    
+    cylinder_calculation (Fram3)
+def switch_to_oilprewarming_calculation ():
+    clear_frame(Fram3)
+    oil_prewarming_calculation (Fram3) 
+def switch_to_cylinder_Design_calculation ():
+    clear_frame(Fram3)
+    cylinder_Design (Fram3)     
+
 #++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++User Defined Functions ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 def label_animation(label1, color1):
     labels = [L1, L2, L3, L4, L5, L6]
@@ -58,7 +69,7 @@ def Theory_of_hyd ():
     B7.place(x=45,y=350)
     L8=tk.Label(Frame1,text="\U0001F4D6", height=2,width=0, background="grey23",font=("Segoe UI Emoji", 10),
     foreground="white")
-    L8.place(x=15,y=395)
+    L8.place(x=15,y=395) 
     B8=tk.Button(Frame1, text="Pascal Law", width=20, height=1, background="steelblue", foreground="white",font=cutom_font1)
     B8.place(x=45,y=400)
     L9=tk.Label(Frame1,text="\U0001F4D6", height=2,width=0, background="grey23",font=("Segoe UI Emoji", 10),
@@ -84,7 +95,7 @@ def display_image(image_path, x, y, width, height):
     photo = ImageTk.PhotoImage(image)
     label = tk.Label(app, image=photo)
     label.image = photo  # Keep a reference to avoid garbage collection
-    label.place(x=x, y=y)
+    label.place(x=x, y=y)   
 # function to update date and time
 time_entry=tk.Entry(Fram2,background="yellow4",foreground="white", width=18, font=cutom_font1)
 time_entry.place(x=1050,y=55,height=25, width=150)
@@ -143,14 +154,20 @@ def Combined_function_1():
     label_animation(L4, "yellow4")
     switch_to_Pressure_drop_calculaton ()
 def Combined_function_2 ():
-    label_animation(L2, "yellow4")
-    swith_to_cylinder_calculation()    
+    label_animation(L2, "yellow4")  
+    switch_to_cylinder_calculation()
+def Combined_function_3 ():
+    label_animation(L5, "yellow4")
+    switch_to_oilprewarming_calculation()
+def Combined_function_4 ():
+    label_animation(L1, "yellow4")
+    switch_to_cylinder_Design_calculation()
 def combined_function ():
     label_animation (L6,"yellow4")
     Theory_of_hyd ()
 L1=tk.Label(Frame1,text="", height=2,width=0, background="grey23")
 L1.place(x=260,y=45)
-B1=tk.Button(Frame1, text=" \U0001F6E0 Throttle Calculations", width=25, height=1, background="yellow4", foreground="white",font=cutom_font1, command=partial(label_animation, L1, "yellow4") )
+B1=tk.Button(Frame1, text=" \U0001F6E0 Cylinder Design Calculation", width=25, height=1, background="yellow4", foreground="white",font=cutom_font1, command=Combined_function_4 )
 B1.place(x=20,y=50)
 L2=tk.Label(Frame1,text="", height=2,width=0, background="grey23")
 L2.place(x=260,y=95)
@@ -166,7 +183,7 @@ B4=tk.Button(Frame1, text="\U0001F529 Pressure Drop Calculations", width=25, hei
 B4.place(x=20,y=200)
 L5=tk.Label(Frame1,text="", height=2,width=0, background="grey23")
 L5.place(x=260,y=245)
-B5=tk.Button(Frame1, text="\u2702 Accumulator Calculations", width=25, height=1, background="yellow4", foreground="white",font=cutom_font1,command=partial(label_animation, L5, "yellow4"))
+B5=tk.Button(Frame1, text="\u2702 Oil Prewarming Calculations", width=25, height=1, background="yellow4", foreground="white",font=cutom_font1,command=Combined_function_3)
 B5.place(x=20,y=250)
 L6=tk.Label(Frame1,text="", height=2,width=0, background="grey23")
 L6.place(x=260,y=295)
