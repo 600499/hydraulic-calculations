@@ -1,26 +1,29 @@
 import tkinter as tk
 
-def load_calculation2(frame):
-    """Load widgets for Calculation 2 in the given frame."""
-    label = tk.Label(frame, text="Calculation 2", font=("Arial", 16))
-    label.pack(pady=10)
+app = tk.Tk()
+app.geometry("600x400")
 
-    entry1 = tk.Entry(frame, width=15)
-    entry1.pack(pady=5, side=tk.LEFT)
+# 1. Create the Frame (but don't place it yet)
+service_page_frame = tk.Frame(app, width=300, height=200, bg="gainsboro")
 
-    entry2 = tk.Entry(frame, width=15)
-    entry2.pack(pady=5, side=tk.RIGHT)
+# 2. Create a variable to track if frame is open or not
+service_page_open = False
 
-    result_label = tk.Label(frame, text="Sum: ")
-    result_label.pack(pady=5)
+# 3. Function to open/close the frame
+def toggle_service_page():
+    global service_page_open
 
-    def calculate_sum():
-        try:
-            num1 = float(entry1.get())
-            num2 = float(entry2.get())
-            result_label.config(text=f"Sum: {num1 + num2}")
-        except ValueError:
-            result_label.config(text="Error: Enter numbers")
+    if not service_page_open:
+        service_page_frame.place(x=20, y=100)  # Show the frame
+        service_page_open = True
+    else:
+        service_page_frame.place_forget()       # Hide the frame
+        service_page_open = False
 
-    btn = tk.Button(frame, text="Add", command=calculate_sum)
-    btn.pack(pady=10)
+# 4. Button to toggle
+B13 = tk.Button(app, text="☰ Service page", width=20, height=1,
+                background="yellow4", foreground="white",
+                command=toggle_service_page)
+B13.place(x=20, y=20)
+
+app.mainloop()

@@ -30,11 +30,13 @@ Fram3=tk.Frame(app,height=685, width=1210, background="#002b36")
 Fram3.place(x=1,y=210)
 
 
+
 #------------------------------------------------------------------Import Pressure Drop calculation----------------------------------------------------------------------------------------------------------#
 from Cylinder_calculation import cylinder_calculation
 from Pressure_Drop_Calculation import pressuer_drop_calculation
 from Oil_Prewarming import oil_prewarming_calculation
 from Cylinder_Design import cylinder_Design
+from Service_Page_1 import Service_page_1
 def clear_frame(frame):
     """Clear all widgets in the frame."""
     for widget in frame.winfo_children():
@@ -51,7 +53,10 @@ def switch_to_oilprewarming_calculation ():
     oil_prewarming_calculation (Fram3) 
 def switch_to_cylinder_Design_calculation ():
     clear_frame(Fram3)
-    cylinder_Design (Fram3)     
+    cylinder_Design (Fram3)  
+def switch_service_page_1 ():
+    Service_page_1(app)
+       
 
 #++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++User Defined Functions ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 def label_animation(label1, color1):
@@ -193,7 +198,7 @@ L11=tk.Label(Frame1,text="", height=2,width=0, background="grey23")
 L11.place(x=260,y=345)
 B11=tk.Button(Frame1, text=" \u2699 Service page", width=25, height=1, background="yellow4", foreground="white",font=cutom_font1)
 B11.place(x=20,y=350)
-B13=tk.Button(app, text=" \u2630 Service page", width=20, height=1, background="yellow4", foreground="white",font=cutom_font1)
+B13=tk.Button(app, text=" \u2630 Service page", width=20, height=1, background="yellow4", foreground="white",font=cutom_font1, command=switch_service_page_1)
 B13.place(x=1,y=170)
 B14=tk.Button(app, text=" \u2630 Service page", width=20, height=1, background="yellow4", foreground="white",font=cutom_font1)
 B14.place(x=195,y=170)
